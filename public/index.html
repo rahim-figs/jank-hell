@@ -29,12 +29,12 @@
 
 
     <script>
-      window['_jks_host'] = process.env.JKS_HOST;
-      window['_jks_script'] = process.env.JKS_HOST + '/monitoring/v1/jks.js';
-      window['_jks_project'] = process.env.JKS_PROJECT;
-      window['_jks_project_key'] = process.env.JKS_PROJECT_KEY;
+      window['_jks_host'] = '%REACT_APP_JKS_HOST%';
+      window['_jks_script'] = '%REACT_APP_JKS_HOST%' + '/monitoring/v1/jks.js';
+      window['_jks_project'] = '%REACT_APP_JKS_PROJECT%';
+      window['_jks_project_key'] = '%REACT_APP_JKS_PROJECT_KEY%';
       window['_jks_namespace'] = 'JKS';
-      window['_jks_disabled'] = true;
+      window['_jks_disabled'] = '%NODE_ENV%' === 'development';
       (function(tWindow,tDocument,tJKSNamespace,tScript){
           if (tJKSNamespace in tWindow) {if(tWindow.console && tWindow.console.log) { tWindow.console.log('Jankstop namespace conflict. Please set window["_jks_namespace"].');} return;}
           scriptElement=tDocument.createElement(tScript);scriptElement.async=1;scriptElement.crossOrigin='anonymous';scriptElement.src='https://'+_jks_script;
