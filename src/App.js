@@ -65,6 +65,14 @@ function App() {
           <Route path='/errors' element={<ErrorsDemo />} />
         </Routes>
       </div>
+
+      <div className='footer'>
+        <div className=''>
+          <span className='w3-margin-left'>Made with ❤️</span>
+          <span className='w3-margin-left w3-large'>•</span>
+          <a href='mailto:hello@janksnag.com' target='_blank' rel='noreferrer' className='w3-margin-left w3-margin-right'>hello@janksnag.com</a>
+        </div>
+      </div>
     </div>
   );
 }
