@@ -33,13 +33,9 @@
       window['_jks_script'] = '%REACT_APP_JKS_HOST%' + '/monitoring/v1/jks.js';
       window['_jks_project'] = '%REACT_APP_JKS_PROJECT%';
       window['_jks_project_key'] = '%REACT_APP_JKS_PROJECT_KEY%';
-      window['_jks_namespace'] = 'JKS';
+      window['_jks_namespace'] = 'Janksnag';
       window['_jks_disabled'] = '%NODE_ENV%' === 'development';
-      (function(tWindow,tDocument,tJKSNamespace,tScript){
-          if (tJKSNamespace in tWindow) {if(tWindow.console && tWindow.console.log) { tWindow.console.log('Jankstop namespace conflict. Please set window["_jks_namespace"].');} return;}
-          scriptElement=tDocument.createElement(tScript);scriptElement.async=1;scriptElement.crossOrigin='anonymous';scriptElement.src='https://'+_jks_script;
-          firstScriptTag=tDocument.getElementsByTagName(tScript)[0];firstScriptTag.parentNode.insertBefore(scriptElement,firstScriptTag);
-      })(window,document,window['_jks_namespace'],'script','user');
+      !function(e,n,s){if(window["_jks_namespace"]in e)e.console&&e.console.log&&e.console.log('Janksnag namespace conflict. Please set window["_jks_namespace"].');else{const o=n.createElement(s);o.async=1,o.crossOrigin="anonymous",o.src="https://"+_jks_script;const c=n.getElementsByTagName(s)[0];c.parentNode.insertBefore(o,c)}}(window,document,"script");
     </script>
   </head>
   <body>

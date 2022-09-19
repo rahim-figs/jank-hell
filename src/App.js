@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { ErrorsDemo } from './components/ErrorsDemo';
@@ -8,6 +9,31 @@ import { SlowInteractionsDemo } from './components/SlowInteractionsDemo';
 import { ThirdPartyDemo } from './components/ThirdPartyDemo';
 
 function App() {
+  const [session, setSession] = useState(null);
+  const [sessionAttempt, setSessionAttempt] = useState(0);
+
+  const getSessionInfo = () => {
+    if (session || sessionAttempt >= 10) {
+      return;
+    }
+
+    setTimeout(() => {
+      const Janksnag = window.Janksnag;
+      if (!Janksnag) {
+        getSessionInfo();
+      }
+
+      const sessionId = Janksnag.getCurrentSession();
+      if (sessionId) {
+        setSession(sessionId);
+      } else {
+        setSessionAttempt(sessionAttempt + 1);
+        getSessionInfo();
+      }
+    }, 1000);
+  };
+
+  getSessionInfo();
 
   return (
     <div>
@@ -18,9 +44,15 @@ function App() {
         <Link to='/slow-interactions' className="w3-bar-item w3-button">Slow click handlers</Link>
         <Link to='/3rd-party' className="w3-bar-item w3-button">Janky 3rd party code</Link>
 
-        <a className='w3-bar-item w3-margin-top' href="https://app.janksnag.com" target='_blank' rel='noreferrer'>
+        <a className='w3-bar-item w3-margin-top' href="https://app.janksnag.com/sign-up" target='_blank' rel='noreferrer'>
           <button className="w3-button w3-lime w3-card">Sign up for Janksnag</button>
         </a>
+
+        { session && (
+          <a href={`https://demo.janksnag.com/demo/jank-hell/session/${session}`} target='_blank' rel='noreferrer' className='w3-bar-item w3-margin-top w3-text-blue'>
+            Go to Janksnag session
+          </a>
+        )}
       </div>
 
       <div style={{ marginLeft: '20%' }}>
